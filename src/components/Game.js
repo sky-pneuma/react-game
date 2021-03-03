@@ -20,7 +20,7 @@ const Game = () => {
 	const [rightAnswer, setRightAnswer] = useState(null);
 	const [selectedAnswer, setSelectedAnswer] = useState(null);
 	const [onGetAnswer, setOnGetAnswer] = useState(false);
-	const [scores, setScores] = useState(0);
+	const [scores, setScores] = useState(90);
 	const [isMusic, setIsMusic] = useState(false);
 	const [isSettings, setIsSettings] = useState(false);
 	const [isHint, setIsHint] = useState(false);
@@ -306,7 +306,7 @@ const Game = () => {
 		
 		{(isGameOver && scores >= 100)
 		 ? <div className="game_result game_result__win">{lang ? 'Победа' : 'You Win'}</div>
-		 : (isGameOver && scores <= -100 ? <div className="game_result game_result__lost">{!lang ? 'Поражение' : 'You lost'}</div> : null)
+		 : (isGameOver && scores <= -100 ? <div className="game_result game_result__lost">{!lang ? 'You lost' : 'Поражение'}</div> : null)
 		}
 	</div>;
 };
