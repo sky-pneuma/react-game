@@ -20,7 +20,7 @@ const Game = () => {
 	const [rightAnswer, setRightAnswer] = useState(null);
 	const [selectedAnswer, setSelectedAnswer] = useState(null);
 	const [onGetAnswer, setOnGetAnswer] = useState(false);
-	const [scores, setScores] = useState(90);
+	const [scores, setScores] = useState(0);
 	const [isMusic, setIsMusic] = useState(false);
 	const [isSettings, setIsSettings] = useState(false);
 	const [isHint, setIsHint] = useState(false);
