@@ -11,23 +11,27 @@ import Statistics from "./Statistics";
 import './styles.scss';
 
 const Game = () => {
+	const initialAnswers = localStorage.getItem('answers');
+	const initialRightAnswer = localStorage.getItem('rightAnswer');
+	const initialScores = localStorage.getItem('scores');
+	const initialStats = localStorage.getItem('statistics');
+	const initialLang = localStorage.getItem('lang');
 	const musicRef = useRef();
 	const [isSounds, setIsSounds] = useState(false);
 	const [clickSound] = useSound(isSounds ? button : null, { volume: 0.1 });
-	const [lang, setLang] = useState(false);
+	const [lang, setLang] = useState(initialLang ? JSON.parse(initialLang) : false);
 	const getRandomCountry = () => Math.floor(Math.random() * (lang ? countriesRU : countriesENG).length);
-	const [answers, setAnswers] = useState([]);
-	const [rightAnswer, setRightAnswer] = useState(null);
+	const [answers, setAnswers] = useState(initialAnswers ? JSON.parse(initialAnswers) : []);
+	const [rightAnswer, setRightAnswer] = useState(initialRightAnswer ? JSON.parse(initialRightAnswer) : null);
 	const [selectedAnswer, setSelectedAnswer] = useState(null);
 	const [onGetAnswer, setOnGetAnswer] = useState(false);
-	const [scores, setScores] = useState(0);
+	const [scores, setScores] = useState(initialScores ? JSON.parse(initialScores) : 0);
 	const [isMusic, setIsMusic] = useState(false);
 	const [isSettings, setIsSettings] = useState(false);
 	const [isHint, setIsHint] = useState(false);
 	const [isHelp, setIsHelp] = useState(false);
 	const [isStatsOpened, setIsStatsOpened] = useState(false);
 	const [isGameOver, setIsGameOver] = useState(false);
-	const initialStats = localStorage.getItem('statistics');
 	const [statistics, setStatistics] = useState(initialStats ? JSON.parse(initialStats) : []);
 	const [statsTemplate, setStatsTemplate] = useState({
 		rightCount: 0,
@@ -42,7 +46,11 @@ const Game = () => {
 	
 	useEffect(() => {
 		localStorage.setItem('statistics', JSON.stringify(statistics));
-	}, [statistics]);
+		localStorage.setItem('scores', JSON.stringify(scores));
+		localStorage.setItem('answers', JSON.stringify(answers));
+		localStorage.setItem('rightAnswer', JSON.stringify(rightAnswer));
+		localStorage.setItem('lang', JSON.stringify(lang));
+	}, [statistics, scores, answers, rightAnswer, lang]);
 	
 	useEffect(() => {
 		if (musicRef.current) musicRef.current.volume = isMusic ? +isMusic : 0;

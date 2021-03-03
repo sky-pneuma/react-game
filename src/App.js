@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import useSound from "use-sound";
 import Game from "./components/Game";
@@ -7,11 +7,16 @@ import rs_school_js from "./media/images/rs_school_js.svg";
 import button from "./media/sounds/button.mp3";
 
 const App = () => {
-	const [currentPage, setCurrentPage] = useState('start');
+	const initialPage = localStorage.getItem('currentPage');
+	const [currentPage, setCurrentPage] = useState(initialPage ? JSON.parse(initialPage) : 'start');
 	const [clickSound] = useSound(button, { volume: 0.5 });
 	
 	useHotkeys('s', () => setCurrentPage('game'));
-	
+
+	useEffect(() => {
+		localStorage.setItem('currentPage', JSON.stringify(currentPage));
+	}, [currentPage]);
+
 	return (
 		<div className="wrapper">
 			{currentPage === 'start'
