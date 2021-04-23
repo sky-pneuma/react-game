@@ -31,9 +31,6 @@ const App = () => {
 				<a href="https://github.com/skyPneuma" target="_blank">
 					<img className="link_img__git" src={git} alt=""/>
 				</a>
-				<a href="https://rs.school/js/" target="_blank">
-					<img className="link_img__rs" src={rs_school_js} alt=""/>
-				</a>
 			</div>
 		</div>
 	)
